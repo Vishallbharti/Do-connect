@@ -1,0 +1,108 @@
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark  bg-dark text-white ">
+  <a class="navbar-brand ml-2"><strong><img src="assets/logo.png" height="40px" width="40px "><span
+        class="ml-0">DoConnect</span></strong></a>
+
+  <div class="collapse navbar-collapse h-2" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item active ml-0">
+        <button class="btn btn-outline-info text-white ml-1 my-2 my-sm-0" type="submit">Post Question
+        </button>
+      </li>
+
+    </ul>
+    <form class="form-inline my-7 my-lg-0" #userform='ngForm'>
+      <h2 class="text-white my-2 my-sm-0" *ngIf='adminService.isLoggedIn()'>
+        <span class="mr-2">{{adminService.username}}</span><span class="mr-4"><i class="fa fa-user"></i></span>
+      </h2>
+
+      <button class="btn btn-outline-danger text-white my-2 my-sm-0" type="submit" (click)="logout()">Log Out
+      </button>
+    </form>
+  </div>
+</nav>
+
+<nav class="navbar navbar-expand-lg" style="background-color: white">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse h-2" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active ml-0">
+        <button class="btn btn-info text-white ml-1 my-2 my-sm-0" type="submit" routerLink="/userDashboard">My Dashboard
+        </button>
+      </li>
+      <li class="nav-item active ml-0">
+        <button class="btn btn-info text-white ml-1 my-2 my-sm-0" type="submit" routerLink="/mypost">My Question
+        </button>
+      </li>
+
+      <li class="nav-item active ml-0">
+        <button class="btn btn-info text-white ml-1 my-2 my-sm-0" type="submit" routerLink="/userPendingAnswer">My
+          Answer
+        </button>
+      </li>
+    </ul>
+    <span class="btn p-0  " routerLink="/question" data-toggle="tooltip" data-placement="top" title="Post Question">
+      <i class="fa fa-paper-plane pr-2 mt-0 text-info" style="font-size: 30px;"></i>
+    </span>
+    <form class="form-inline my-7 my-lg-0" #userform='ngForm'>
+      <input class="form-control mr-sm-2" type="search" name="search" [(ngModel)]="searchText" placeholder="Search "
+        aria-label="Search">
+
+    </form>
+  </div>
+</nav>
+
+<div class="container mt-5">
+
+  <div class="card">
+    <form #questionform='ngForm' (ngSubmit)='onSubmit()' enctype="multipart/form-data">
+      <h1 class="text-center text-info mt-2">Post Question</h1>
+      <h3 class="text-dark"></h3>
+      <div class="card-body">
+        <div class="form-group">
+          <label for="exampleInputEmail1">
+            <h3>Topic</h3>
+          </label>
+          <input type="text" class="form-control" [(ngModel)]='question.title' name="name" id="exampleInputEmail1"
+            aria-describedby="emailHelp" placeholder="Enter Question Topic">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1" [(ngModel)]='question.desc'>
+            <h3>Description</h3>
+          </label>
+          <editor [(ngModel)]='question.desc' name="desc" [tagName]="'desc'" [init]="{
+            height: 300,
+            menubar: false,
+            mode : 'specific_textareas',
+            selector: 'textarea',
+            plugins: [
+              'advlist autolink lists link image charmap print preview anchor codesample',
+              'searchreplace visualblocks code fullscreen image imagetools image code',
+              'insertdatetime media table paste code help wordcount'
+            ],
+        codesample_languages: [
+        { text: 'TypeScript', value: 'typescript' },
+        { text: 'JavaScript', value: 'javascript' },
+        { text: 'HTML/XML', value: 'markup' },
+        { text: 'CSS', value: 'css' }
+      ],
+            toolbar:
+            'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | image codesample undo redo | link image | code'
+          }"></editor>
+        </div>
+
+        <div class="form-group">
+          <label for="inputLastName" class="label">Attachment</label>
+
+          <input type="file" class="form-control" name="img_url" accept=".jpg,.jpeg,.png"
+            aria-describedby="emailHelp" (change)="onFileSelected($event)">
+        </div>
+
+        <button type="submit" class="btn btn-primary pull-right mb-3">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

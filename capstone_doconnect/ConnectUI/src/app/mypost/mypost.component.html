@@ -1,0 +1,94 @@
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark  bg-dark text-white ">
+  <a class="navbar-brand ml-2"><strong><img src="assets/logo.png" height="40px" width="40px "><span
+        class="ml-0">DoConnect</span></strong></a>
+
+  <div class="collapse navbar-collapse h-2" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item active ml-0">
+        <button class="btn btn-outline-info text-white ml-1 my-2 my-sm-0" type="submit">My Question
+        </button>
+      </li>
+
+    </ul>
+    <form class="form-inline my-7 my-lg-0" #userform='ngForm'>
+      <h2 class="text-white my-2 my-sm-0" *ngIf='adminService.isLoggedIn()'>
+        <span class="mr-2">{{adminService.username}}</span><span class="mr-4"><i class="fa fa-user"></i></span>
+      </h2>
+
+      <button class="btn btn-outline-danger text-white my-2 my-sm-0" type="submit"  (click)="logout()">Log Out
+      </button>
+    </form>
+  </div>
+</nav>
+
+<nav class="navbar navbar-expand-lg" style="background-color: white">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse h-2" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active ml-0">
+        <button class="btn btn-info text-white ml-1 my-2 my-sm-0" type="submit" routerLink="/userDashboard">My Dashboard
+        </button>
+      </li>
+      <li class="nav-item active ml-0">
+        <button class="btn btn-info text-white ml-1 my-2 my-sm-0" type="submit" routerLink="/mypost">My Question
+        </button>
+      </li>
+
+      <li class="nav-item active ml-0">
+        <button class="btn btn-info text-white ml-1 my-2 my-sm-0" type="submit" routerLink="/userPendingAnswer">My
+          Answer
+        </button>
+      </li>
+    </ul>
+    <span class="btn p-0  " routerLink="/question" data-toggle="tooltip" data-placement="top" title="Post Question">
+      <i class="fa fa-paper-plane pr-2 mt-0 text-info" style="font-size: 30px;"></i>
+    </span>
+    <form class="form-inline my-7 my-lg-0" #userform='ngForm'>
+      <input class="form-control mr-sm-2" type="search" name="search" [(ngModel)]="searchText" placeholder="Search "
+        aria-label="Search">
+
+    </form>
+  </div>
+</nav>
+
+
+<div class="container" *ngIf='queBeanList.length > 0'
+  style="background:linear-gradient(90deg,hsl(0,100%,50%,0.1) 0%,hsla(260,29%,36%,0.2)100%)">
+  <div *ngFor='let question of queBeanList |filter : searchText'>
+    <div class="card mt-4" *ngIf='question.approval === 0 && question.user_id === currentUser.id'
+      style="box-shadow: 3px 3px 3px 3px lightblue">
+      <div class="card-header bg-info text-white"
+        style="background: linear-gradient(90deg,hsl(0,100%,50%,0.1) 0%,hsla(260,29%,36%,0.2)100%);font-size: 20px;">
+        <strong> Topic : {{question.topic}}</strong>
+
+      </div>
+
+      <div class="card-body " style="height: 300px; overflow-y:auto;background-color: white">
+        <div class="row">
+          <div class="col-sm-12 col-lg-9 col-md-9">
+            <h3 class="card-title  mr-2 "style="font-size: 30px;color: coral;" >  <span> <i class="fa fa-question-circle mr-2 p-1" style="font-size: 30px;color: coral;" ></i></span>     Question</h3>
+            <span> <p class="card-text mb-2" style="color:#131029;font-size: 20px;border-bottom: 2px solid red;" [innerHtml]="question.description"></p> </span>
+         </div>
+          <div class="col-sm-12 col-lg-3 col-md-3">
+            <div class="text-center"  style="width:200px; height: 200px;">
+               <img src="{{question.img_url}}" alt="" width="200px" height="150px" *ngIf='question.img_url'>
+             </div>
+            <div class="text-center mt-3">
+              <button class="btn btn-danger mr-3">Pending</button>
+            </div>
+        </div>
+        <div>
+          
+          <!-- <a href="#" class="btn btn-primary" [disabled]="isDisabled" *ngIf='userService.isLoggedIn()' >Response</a> -->
+         
+        </div>
+       
+      </div>
+    </div>
+
+  </div>
+</div>

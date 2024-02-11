@@ -1,0 +1,10 @@
+.app{
+ background-image: url("../assets/bg.jpg"); 
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	
+	/* background: linear-gradient(90deg,hsl(0,100%,50%,0.1) 0%,hsla(260,29%,36%,0.2)100%); */
+
+	
+}

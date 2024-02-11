@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark  bg-dark text-white ">
+    <a class="navbar-brand ml-2"><strong><img src="assets/logo.png" height="40px" width="40px "><span
+                class="ml-0">DoConnect</span></strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse h-2" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active ml-0">
+                <button class="btn btn-outline-info text-white ml-1 my-2 my-sm-0" type="submit">Message
+                </button>
+            </li>
+        </ul>
+        <form class="form-inline my-7 my-lg-0" #userform='ngForm'>
+            <h2 class="text-white my-2 my-sm-0" *ngIf='adminService.isLoggedIn()'>
+                <span class="mr-2">{{adminService.username}}</span><span class="mr-4"><i class="fa fa-user"></i></span>
+            </h2>
+
+            <button class="btn btn-outline-danger text-white my-2 my-sm-0" (click)="logout()" type="submit">Log Out
+            </button>
+        </form>
+    </div>
+</nav>
+
+<nav class="navbar navbar-expand-lg" style="background-color: white">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse h-2" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active ml-0">
+          <button class="btn btn-info text-white ml-1 my-2 my-sm-0" type="submit" routerLink="/userDashboard">User Dashboard
+          </button>
+        </li>
+     </ul>
+      <span class="btn p-0  " routerLink="/question" data-toggle="tooltip" data-placement="top" title="Post Question">
+        <i class="fa fa-paper-plane pr-2 mt-0 text-info" style="font-size: 30px;"></i>
+      </span>
+      <form class="form-inline my-7 my-lg-0" #userform='ngForm'>
+        <input class="form-control mr-sm-2" type="search" name="search" [(ngModel)]="searchText" placeholder="Search "
+          aria-label="Search">
+      </form>
+    </div>
+  </nav>
+  <div class="container mt-4">
+    <div *ngIf="arrMsg.length > 0">
+    <div class="alert alert-success" role="alert" *ngFor="let msg of arrMsg">
+        <span class="alert-heading" style="font-size: 24px;"><strong>{{msg.subject}}</strong></span><span class="float-right"><strong class="mr-2" style="font-size: 24px;">From user : {{msg.fromUserId}}</strong><i class="fa fa-comments"  data-toggle="tooltip" data-placement="top" title="Write message" (click)="sendMessage(msg.toUserId, msg.fromUserId)" style="font-size: 34px;"></i></span>
+        <p [innerHtml]='msg.description'></p>
+    </div>
+   </div>
+  </div>

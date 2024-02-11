@@ -1,0 +1,12 @@
+<nav class="navbar navbar-dark bg-dark justify-content-between">
+    <h1 class="btn btn-outline-info my-2 my-sm-0">Book List</h1>
+    <form class="form-inline">
+        <button class="btn btn-outline-info my-2 my-sm-0" *ngIf='!userService.isLoggedIn()'>
+            <a style="text-decoration: none;" class="text-white" routerLink='login'>Login</a>
+        </button>
+        <button class="btn btn-outline-info my-2 my-sm-0 ml-2" *ngIf='userService.isLoggedIn()'>
+            <a style="text-decoration: none;" class="text-white" routerLink='logout' (click)='userService.logout()'>Logout</a>
+        </button>
+
+    </form>
+</nav>

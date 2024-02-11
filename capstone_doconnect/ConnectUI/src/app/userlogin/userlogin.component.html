@@ -1,0 +1,65 @@
+<nav class="navbar navbar-dark bg-dark justify-content-between">
+    <h1 class="btn btn-outline-info my-2 my-sm-0">User Login Here</h1>
+    <!-- register button  -->
+</nav>
+<!-- user login form  -->
+<div class='container pt-5 pb-5'>
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6 col-lg-offset-3">
+            <h3 class="text-center text-danger">{{errMessage}}</h3>
+            <form #userform='ngForm' (ngSubmit)='login()'
+                class="bg-info pt-5 pb-5 pl-5 pr-5 border border-dark rounded">
+                <h3 class='text-center'>Please Login</h3>
+                <div class="form-group">
+                    <label for="username">
+                        <h4>Email</h4>
+                    </label>
+                    <!-- email field  -->
+                    <input type="text" name='email' class='form-control' [(ngModel)]='user.email' required
+                        #email='ngModel' [class.is-invalid]='email.invalid && email.touched'
+                        pattern='^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+[.]+[a-zA-Z0-9.-]+$' placeholder="Enter email">
+                    <!-- validation message   -->
+                    <div *ngIf='email.touched'>
+                        <div *ngIf='email.errors && (email.invalid)'>
+                            <small class="text-danger" *ngIf='email.errors.required'>
+                                Email is required.
+                            </small>
+                            <small class="text-danger" *ngIf='email.errors.pattern'>
+                                Please enter valid email id (Ex. vishal@gmail.com).
+                            </small>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- password field  -->
+                <div class="form-group">
+                    <label for="password">
+                        <h4>Password</h4>
+                    </label>
+                    <input type="password" name='password' class='form-control' [(ngModel)]='user.password' required
+                        #password='ngModel' [class.is-invalid]='password.invalid && password.touched'
+                        pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
+                        placeholder="Enter password">
+                    <!-- validation message  -->
+                    <div *ngIf='password.touched'>
+                        <div *ngIf='password.errors && (password.invalid)'>
+                            <small class="text-danger" *ngIf='password.errors.required'>
+                                Password is required.
+                            </small>
+                            <small class="text-danger" *ngIf='password.errors.pattern'>
+                                Minimum eight characters, at least one letter, one number and one special character:
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <!-- login button  -->
+                <div class="center">
+                    <button type="submit" class="btn btn-outline-info my-2 my-sm-0 bg-dark" value="Login">Login
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+</div>

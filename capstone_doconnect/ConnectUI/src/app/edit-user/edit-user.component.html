@@ -1,0 +1,86 @@
+<nav class="navbar navbar-dark bg-dark justify-content-between">
+    <h1 class="btn btn-outline-info my-2 my-sm-0">Update User Here</h1>
+    <form class="form-inline">
+        <h2 class="text-white my-2 my-sm-0" *ngIf='adminService.isLoggedIn()'>
+            <span class="mr-2">{{adminService.username}}</span><span
+                class="mr-4"><i class="fa fa-user"></i></span>
+        </h2>
+        <button class="btn btn-outline-info my-2 my-sm-0" *ngIf='adminService.isLoggedIn()'>
+            <a style="text-decoration: none;" class="text-white" routerLink='logout'  (click)='adminService.logout()'
+                id="">Logout</a>
+        </button>
+    </form>
+</nav>
+<!-- main container  -->
+<div class='container pt-5 pb-5'>
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6 col-lg-offset-3">
+            <form #userform='ngForm' (ngSubmit)='onSubmit()'
+                class="bg-info pt-5 pb-5 pl-5 pr-5 border border-dark rounded">
+                <h3 class='text-center'>Update User Details</h3>
+                <div class="form-group">
+                    <label for="username"><h4>Name</h4></label>  
+                    
+                    <input type="text" name='name' class='form-control' [(ngModel)]='user.name' required
+                    #name='ngModel' [class.is-invalid]='name.invalid && name.touched' minlength="3"
+                    pattern='^[A-Za-z\s]+$' placeholder="Enter  Name"/>
+                    <div *ngIf='name.touched'>
+                        <div *ngIf='name.errors && (name.invalid)'>
+                            <small class="text-danger" *ngIf='name.errors.required'>
+                                Book name is required.
+                            </small>
+                            <small class="text-danger" *ngIf='name.errors.pattern'>
+                                Book name should be only alphabet and spaces.
+                            </small>
+                            <small class="text-danger" *ngIf='name.errors.minlength'>
+                                Book name should be minimum 3 character.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="username"><h4>Email</h4></label>  
+                    <input type="text" name='email' class='form-control' [(ngModel)]='user.email' required
+                        #email='ngModel' [class.is-invalid]='email.invalid && email.touched'
+                        pattern='^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+[.]+[a-zA-Z0-9.-]+$' placeholder="Enter email">
+                    <div *ngIf='email.touched'>
+                        <div *ngIf='email.errors && (email.invalid)'>
+                            <small class="text-danger" *ngIf='email.errors.required'>
+                                Email is required.
+                            </small>
+                            <small class="text-danger" *ngIf='email.errors.pattern'>
+                                Please enter valid email id (Ex. vishal@gmail.com).
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password"><h4>Password</h4></label>  
+                    <input type="password" name='password' class='form-control' [(ngModel)]='user.password' required
+                        #password='ngModel' [class.is-invalid]='password.invalid && password.touched'
+                        pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
+                        placeholder="Enter password">
+                    <div *ngIf='password.touched'>
+                        <div *ngIf='password.errors && (password.invalid)'>
+                            <small class="text-danger" *ngIf='password.errors.required'>
+                                Password is required.
+                            </small>
+                            <small class="text-danger" *ngIf='password.errors.pattern'>
+                                Minimum eight characters, at least one letter, one number and one special character:
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="center">
+                    <button type="submit"
+                        class="btn btn-outline-info my-2 my-sm-0 bg-dark" name="update"
+                        value="Register">Update</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+</div>

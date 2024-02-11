@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark  bg-dark text-white ">
+    <a class="navbar-brand ml-2"><strong><img src="assets/logo.png" height="40px" width="40px "><span
+          class="ml-0">DoConnect</span></strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse h-2" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active ml-1">
+          <button class="btn btn-outline-info text-white  my-sm-0" type="submit" routerLink="/mypost">My Post </button>
+        </li>
+        <li class="nav-item active ml-1">
+          <button class="btn btn-outline-info text-white  my-sm-0" type="submit" routerLink="/userDashboard">My Dashboard
+          </button>
+        </li>
+       
+        
+      </ul>
+      <span class="btn p-0  " routerLink="/question" data-toggle="tooltip" data-placement="top" title="Post Question">
+        <i class="fa fa-paper-plane pr-4 mt-0 " style="font-size: 30px;"></i>
+      </span>
+      <form class="form-inline my-7 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-danger text-white ml-3 my-2 my-sm-0" type="submit" routerLink="/homepage">Log Out
+        </button>
+      </form>
+    </div>
+  </nav>
+  <div class="container mt-5">
+    <div class="card">
+        <form #questionform='ngForm' (ngSubmit)='onSubmit()'>
+            <h1 class="text-center text-info mt-2">Write your message</h1>
+            <h3 class="text-dark"></h3>
+            <div class="card-body">
+              <div class="form-group">
+                <label for="exampleInputEmail1">
+                  <h3>Subject</h3>
+                </label>
+                <input type="text" class="form-control" [(ngModel)]='writeMsg.subject' name="name" id="exampleInputEmail1"
+                  aria-describedby="emailHelp" placeholder="Enter Question Topic">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1" [(ngModel)]='question.desc'>
+                  <h3>Description</h3>
+                </label>
+                <editor [(ngModel)]='writeMsg.description' name="description" [tagName]="'description'" [init]="{
+                  height: 300,
+                  menubar: false,
+                  mode : 'specific_textareas',
+                  selector: 'textarea',
+                  plugins: [
+                    'advlist autolink lists link image charmap print preview anchor codesample',
+                    'searchreplace visualblocks code fullscreen image imagetools image code',
+                    'insertdatetime media table paste code help wordcount'
+                  ],
+              codesample_languages: [
+              { text: 'TypeScript', value: 'typescript' },
+              { text: 'JavaScript', value: 'javascript' },
+              { text: 'HTML/XML', value: 'markup' },
+              { text: 'CSS', value: 'css' }
+            ],
+                  toolbar:
+                  'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | image codesample undo redo | link image | code'
+                }"></editor>
+              </div>
+      
+              <button type="submit" class="btn btn-primary pull-right mb-3">Send</button>
+            </div>
+          </form>
+      
+    </div>
+  </div>

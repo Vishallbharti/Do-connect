@@ -1,0 +1,92 @@
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark  bg-dark text-white ">
+    <a class="navbar-brand ml-2"  ><strong><img src ="assets/logo.png" height="40px" width="40px "><span class="ml-0 ">DoConnect</span></strong></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse h-2"  id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        
+          <li class="nav-item active ml-0">
+            <button class="btn btn-outline-info text-white ml-1 my-2 my-sm-0" type="submit" >Users
+            </button>
+          </li>
+      
+        </ul>
+        <form class="form-inline my-7 my-lg-0" #userform='ngForm'>
+          <h2 class="text-white my-2 my-sm-0" *ngIf='adminService.isLoggedIn()'>
+            <span class="mr-2">{{adminService.username}}</span><span
+                class="mr-2"><i class="fa fa-user"></i></span>
+        </h2>
+        
+  
+        <button class="btn btn-outline-danger text-white ml-3 my-2 my-sm-0 mr-0" type="submit" (click)="logout()" 
+
+        >Log Out </button>
+     </form>
+  </div>
+    </nav>
+
+<nav class="navbar navbar-expand-lg" style="background-color: white">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse h-2" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active ml-0">
+          <button class="btn btn-info text-white ml-1 my-2 my-sm-0" type="submit" routerLink="/adminDashboard">Admin Dashboard
+          </button>
+        </li>
+        <li class="nav-item active ml-0">
+          <button class="btn btn-info text-white ml-1 my-2 my-sm-0" type="submit" routerLink="usersignup">Add User
+          </button>
+        </li>
+      </ul>
+      <form class="form-inline my-7 my-lg-0" #userform='ngForm'>
+      <input class="form-control mr-sm-2" type="search" name="search" [(ngModel)]="searchText" placeholder="Search "
+          aria-label="Search">
+  
+      </form>
+    </div>
+  </nav>
+  
+
+<div class='container mt-4'>
+    <div class="row">
+       <table class="table table-dark mt-3">
+           <!-- <h3 class="text-ceneter text-danger">{{errMessage}}</h3> -->
+            <thead>
+                <tr>
+                    <th scope="col">User Id</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">User Email</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+           
+            {{users}}
+            <tbody class="text-info" *ngIf='usrs.length > 0'>
+                <tr *ngFor='let user of usrs |filter: searchText'>
+                    <td>
+                        <p>{{user.id}}</p>
+                    </td>
+                    <td>
+                        <p>{{user.name}}</p>
+                    </td>
+                    <td>
+                        <p>{{user.email}}</p>
+                    </td>
+                    <td>
+                        <i class="fa fa-edit text-warning" (click)="edit(user)"
+                        style="font-size: 24px; text-decoration: none;"></i>
+                    </td>
+                    <td>
+                        <i class="fa fa-trash text-danger" (click)="delete(user.id)"
+                        style="font-size: 24px; text-decoration: none;"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

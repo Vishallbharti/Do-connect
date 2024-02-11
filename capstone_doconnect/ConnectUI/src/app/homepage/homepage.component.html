@@ -1,0 +1,87 @@
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark  bg-dark text-white ">
+  <a class="navbar-brand ml-2" href="#"><strong><img src="assets/logo.png" height="40px" width="40px "><span
+        class="ml-2">DoConnect</span></strong></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse h-2" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="btn btn-outline-info mr-2 mt-2 nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="btn btn-outline-info mr-2 mt-2 nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Login
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item " routerLink="/adminlogin">Admin Login</a>
+          <a class="dropdown-item " routerLink="/userLogin">User Login</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="btn btn-outline-info mt-2 nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Sign Up
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="/adminsignup">Admin SignUp</a>
+          <a class="dropdown-item" href="#" routerLink="/userRegister">User SignUp</a>
+        </div>
+      </li>
+    </ul>
+    
+    
+    <form class="form-inline my-7 my-lg-0" #userform='ngForm'>
+      <button class="btn bg-transparent text-white" [disabled]="isDisabled"> 
+      <span data-toggle="tooltip" data-placement="top" title="Please Login"> <i class="fa fa-paper-plane pr-2 mt-0 "
+          style="font-size: 30px;"></i>
+      </span>
+    </button>
+      <input class="form-control mr-sm-2" [(ngModel)]="searchText" type="search" name="search" placeholder="Search Question Topic"
+        aria-label="Search">
+    </form>
+  </div>
+</nav>
+<nav class="navbar navbar-expand-lg" style="background-color: white;">
+ <marquee class="text-dark"><h2>Post here your doubt and get response by smart people</h2></marquee>
+</nav>
+<div class="container" *ngIf='queBeanList.length > 0' style="background:linear-gradient(90deg,hsl(0,100%,50%,0.1) 0%,hsla(260,29%,36%,0.2)100%)">
+  <div  *ngFor='let question of queBeanList |filter : searchText'>      
+  <div class="card mt-4"  *ngIf='question.approval === 1'
+      style="box-shadow: 3px 3px 3px 3px white ">
+     <div class="card-header bg-info text-white"
+        style="background: linear-gradient(90deg,hsl(0,100%,50%,0.1) 0%,hsla(260,29%,36%,0.2)100%);font-size: 20px;">
+        <span><strong> Topic : {{question.topic}}</strong></span><span class="float-right" style="font-size: 24px;"><strong>User ID : {{question.user_id}}</strong></span>
+      </div>
+      <div class="card-body " style="height: 200px; overflow-y:auto;background-color: white">
+        <div class="row">
+          <div class="col-sm-12 col-lg-9 col-md-9">
+            <h3 class="card-title  mr-2 "style="font-size: 30px;color: coral;" >  <span> <i class="fa fa-question-circle mr-2 p-1" style="font-size: 30px;color: coral;" ></i></span>     Question</h3>
+            <span> <p class="card-text mb-2" style="color:#131029;font-size: 20px;border-bottom: 2px solid red;" [innerHtml]="question.description"></p> </span>
+         </div>
+          <div class="col-sm-12 col-lg-3 col-md-3" *ngIf='question.img_url'>
+            <div class="float-right"  style="width:200px; height: 200px;">
+              <img src="{{question.img_url}}" alt="" width="200px" height="150px" *ngIf='question.img_url'>
+            </div>
+           </div>
+        </div>
+          <div *ngIf='question.answers.length > 0'>
+        <h5 class="card-title text-success"><i class="fa fa-list mr-2"></i>Answer</h5>
+        <ul *ngFor='let answer of question.answers'>
+        <li class="card-text ml-3" *ngIf='answer.approval === 1' [innerHtml]='answer.description'></li>
+        </ul>
+        </div>
+        <!-- <a href="#" class="btn btn-primary" [disabled]="isDisabled" *ngIf='userService.isLoggedIn()' >Response</a> -->
+        <span class="float-right">
+          <span class="btn " routerLink="/question" data-toggle="tooltip" data-placement="right" title="Please Login">
+            <button class="btn btn-info float-right mr-4" [disabled]="isDisabled">Response
+            </button>
+          </span>
+        </span>
+      </div>
+    </div>
+
+    </div>
+</div>
